@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import {Match} from '@Components/Match';
 import GestureRecognizer from 'react-native-swipe-gestures';
