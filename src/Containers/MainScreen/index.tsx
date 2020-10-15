@@ -1,9 +1,8 @@
 import React, {useMemo, useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
 import {Match} from '@Components/Match';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import {deviceWidth, normalize} from '@Plugins/Device';
 import {MockData} from '@Utils/MockData';
+import {SwipeDetect} from '@Components/index';
 
 const MainScreen: React.FunctionComponent = (): JSX.Element => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -36,7 +35,7 @@ const MainScreen: React.FunctionComponent = (): JSX.Element => {
     setTimeout(() => {
       inputRefs.forEach((value) => {
         value.current.scrollToOffset({
-          offset: -pageNumber * (deviceWidth() + normalize(40)),
+          offset: -pageNumber * (deviceWidth() - normalize(40)),
           animated: true,
         });
       });
@@ -44,28 +43,24 @@ const MainScreen: React.FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <GestureRecognizer
+    <SwipeDetect
       style={{flex: 1}}
       onSwipeLeft={_onSwipeLeft}
       onSwipeRight={_onSwipeRight}>
-      <ScrollView>
-        <SafeAreaView>
-          {MockData.map((value, index) => {
-            return (
-              <Match
-                ref={inputRefs[index]}
-                league={value.league}
-                date={value.date}
-                team1={value.team1}
-                team2={value.team2}
-                rates={value.rates}
-                key={index}
-              />
-            );
-          })}
-        </SafeAreaView>
-      </ScrollView>
-    </GestureRecognizer>
+      {MockData.map((value, index) => {
+        return (
+          <Match
+            ref={inputRefs[index]}
+            league={value.league}
+            date={value.date}
+            team1={value.team1}
+            team2={value.team2}
+            rates={value.rates}
+            key={index}
+          />
+        );
+      })}
+    </SwipeDetect>
   );
 };
 

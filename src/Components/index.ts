@@ -1,3 +1,4 @@
 import Match from './Match';
+import SwipeDetect from './SwipeDetect';
 
-export {Match};
+export {Match, SwipeDetect};
